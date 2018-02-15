@@ -12,8 +12,12 @@
 =======
             $player1 = array('name' => 'Chino', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
             $player2 = array('name' => 'Celina', 'imgUrl' => './img/user_pics/celina.jpg', 'hand' => array(), 'points' => 0);
+<<<<<<< HEAD
 >>>>>>> 487c8747a333193e42feb8a1a16c4e36966d454c
             $player3 = array('name' => '', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
+=======
+            $player3 = array('name' => 'Miguel', 'imgUrl' => './img/user_pics/miguel.jpg', 'hand' => array(), 'points' => 0);
+>>>>>>> 8a9af20b27576dc6410316eef6bad48998ce8055
             $player4 = array('name' => '', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
             
             $allPlayers = array(
