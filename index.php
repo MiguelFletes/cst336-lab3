@@ -8,7 +8,7 @@
             
             $player1 = array('name' => 'Chino', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
             $player2 = array('name' => 'Celina', 'imgUrl' => './img/user_pics/celina.jpg', 'hand' => array(), 'points' => 0);
-            $player3 = array('name' => '', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
+            $player3 = array('name' => 'Miguel', 'imgUrl' => './img/user_pics/miguel.jpg', 'hand' => array(), 'points' => 0);
             $player4 = array('name' => '', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
             
             $allPlayers = array(
