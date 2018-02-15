@@ -6,7 +6,7 @@
     <body>
         <?php
             
-            $player1 = array('name' => 'Chino', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
+            $player1 = array('name' => 'Chino', 'imgUrl' => './img/cards/clubs/13.png', 'hand' => array(), 'points' => 0);
             $player2 = array('name' => '', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
             $player3 = array('name' => '', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
             $player4 = array('name' => '', 'imgUrl' => '', 'hand' => array(), 'points' => 0);
