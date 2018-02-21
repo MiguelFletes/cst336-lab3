@@ -21,27 +21,59 @@
                 foreach($allPlayers as $player) {
                     echo "<img src='" . $player['imgUrl'] . "'/>";
                     echo $player['name'] . "<br/>";
+                    generateDeck($player);
+                    displayhand($player);
                 }
             }
             
-            function getImgURLForCardIndex($index)
-            {
-                $suitIndex= floor($index/13);
-                switch ($suitIndex) {
-                    case 0:
-                        // code...
-                        break;
+            function displayHand(&$player){
+                for($i=0; $i<count($player['hand']); $i++){
+                    echo "<img id='playerCards' src=" . $player['hand'][$i] . " />";
+                }
+                echo "<br>";
+            }
+            
+            // function getImgURLForCardIndex($index)
+            // {
+            //     $suitIndex= floor($index/13);
+            //     switch ($suitIndex) {
+            //         case 0:
+            //             // code...
+            //             break;
                     
-                    default:
-                        // code...
-                        break;
-                }
-            }
+            //         default:
+            //             // code...
+            //             break;
+            //     }
+            // }
             
-            function generateDeck()
+            function generateDeck(&$player)
             {
-                for ($i = 0; $i < 51; $i++) {
-                     $card= array('imgURL' => "");
+                $count = 0;
+                while($player['points'] <= 38){
+                    $suit = rand(1,4);
+                    $card = rand(1,13);
+
+                    switch ($suit) {
+                        case 1:
+                            $player['hand'][$count] = "./img/cards/hearts/" . "$card" . ".png";
+                            $player['points'] += $card;
+                            break;
+                        case 2:
+                            $player['hand'][$count] = "./img/cards/diamonds/" . "$card" . ".png";
+                            $player['points'] += $card;
+                            break;
+                        case 3:
+                            $player['hand'][$count] = "./img/cards/spades/" . "$card" . ".png";
+                            $player['points'] += $card;
+                            break;
+                        case 4:
+                            $player['hand'][$count] = "./img/cards/clubs/" . "$card" . ".png";
+                            $player['points'] += $card;
+                            break;
+                    }
+                    
+                    $count++;
                 }
             }
             
