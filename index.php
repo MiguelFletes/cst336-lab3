@@ -36,14 +36,6 @@
                     generateDeck($player,$allCards);
                     displayhand($player);
                 }
-                for($i = 0; $i < count($allCards); $i++)
-                {
-                    for($j = 0; $j < 13; $j++)
-                    {
-                        echo $allCards[$i][$j];
-                    }
-                    echo "<br/>";
-                }
                 
             }
             
@@ -112,7 +104,6 @@
             {
                 
             }
-        
             printGameState($allPlayers,$allCards);
         ?>
     </body>
