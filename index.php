@@ -10,6 +10,18 @@
             $player3 = array('name' => 'Miguel', 'imgUrl' => './img/user_pics/miguel.jpg', 'hand' => array(), 'points' => 0);
             $player4 = array('name' => 'Oscar', 'imgUrl' => './img/user_pics/Oscar_Ramirez.jpg', 'hand' => array(), 'points' => 0);
             
+            $heartsUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
+            $clubsUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
+            $diamondsUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
+            $spadesUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
+            
+            $allCards = array(
+                $heartsUsed,
+                $diamondsUsed,
+                $spadesUsed,
+                $clubsUsed
+                );
+            
             $allPlayers = array(
                 $player1,
                 $player2,
@@ -17,13 +29,22 @@
                 $player4
                 );
                 
-            function printGameState($allPlayers){
+            function printGameState($allPlayers,$allCards){
                 foreach($allPlayers as $player) {
                     echo "<img src='" . $player['imgUrl'] . "'/>";
                     echo $player['name'] . "<br/>";
-                    generateDeck($player);
+                    generateDeck($player,$allCards);
                     displayhand($player);
                 }
+                for($i = 0; $i < count($allCards); $i++)
+                {
+                    for($j = 0; $j < 13; $j++)
+                    {
+                        echo $allCards[$i][$j];
+                    }
+                    echo "<br/>";
+                }
+                
             }
             
             function displayHand(&$player){
@@ -47,12 +68,22 @@
             //     }
             // }
             
-            function generateDeck(&$player)
+            function generateDeck(&$player,&$allCards)
             {
                 $count = 0;
+                
                 while($player['points'] <= 38){
-                    $suit = rand(1,4);
-                    $card = rand(1,13);
+                    $again = true;
+                    do{
+                        $suit = rand(1,4);
+                        $card = rand(1,13);
+                        if($allCards[$suit-1][$card-1] == 0)
+                        {
+                            $again = false;
+                            $allCards[$suit-1][$card-1] = 1;
+                        }
+                    }while($again);
+                    
 
                     switch ($suit) {
                         case 1:
@@ -82,7 +113,7 @@
                 
             }
         
-            printGameState($allPlayers);
+            printGameState($allPlayers,$allCards);
         ?>
     </body>
 </html>
