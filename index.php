@@ -16,7 +16,6 @@
             $diamondsUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
             $spadesUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
             
-            
             $allCards = array(
                 $heartsUsed,
                 $diamondsUsed,
@@ -31,9 +30,9 @@
                 $player4
                 );
                 
-            
+            $allPoints = array();
                 
-            function printGameState(&$allPlayers,&$allCards){
+            function printGameState(&$allPlayers,&$allCards,&$allPoints){
                 foreach($allPlayers as $player) {
                     echo "<img src='" . $player['imgUrl'] . "' width='100' height='150' />";
                     echo $player['name'] . "<br/>";
@@ -41,9 +40,11 @@
                     echo "<div id = gamePrint>";
                     displayhand($player);
                     echo "</div>";
+                    array_push($allPoints, $player['points']);
 
-                }
+                }   
                 
+
             }
             
             function displayHand(&$player){
@@ -53,7 +54,6 @@
                 }
         
                 echo "\t\t" . $player['points'] . " points<br>";
-
             }
             
             function generateDeck(&$player,&$allCards)
@@ -91,34 +91,44 @@
                             $player['points'] += $card;
                             break;
                     }
-                    
                     $count++;
                 }
             }
             
-            //Function to print out the winner and points won. This function is not finished.. 
-            function getWinner(&$allPlayers){
-                $winner = array();
-                $points = 0;
-                foreach ($allPlayers as $players) {
-                    $points += $players['points'];
-                    if(count($winner) ==0){
-                        array_push($winner, $players);
-                    }
-                    else if ($winner[0]['points']<$players['points']){
-                        unset($winner);
-                        $winner = array();
-                        array_push($winner, $players);
-                    }
+            function getWinner(&$allPoints, &$allPlayers){
+                
+                $possibleWinner = array();
+                $index = array();
+                $winnerTotal = 0;
+                for($i = 0; $i < sizeof($allPoints); $i++)
+                {
                     
+                    $winnerTotal += $allPoints[$i];
+                    if($allPoints[$i] < 43)
+                    {
+                        array_push($possibleWinner, $allPoints[$i]);
+                        array_push($index, $i);
+                    }
                 }
+                $max = $possibleWinner[0];
+                $maxIndex = $index[0];
+                for($i = 1; $i < sizeof($possibleWinner); $i++)
+                {
+                    if($possibleWinner[$i] > $max)
+                    {
+                        $max = $possibleWinner[$i];
+                        $maxIndex = $index[$i];
+                    }
+                }
+
                 echo "<h1><br>Winner is</h1>";
-                echo $winner[0]['name'];
-                echo $points;
+                echo $allPlayers[$maxIndex]['name'];
+                echo $max;
+                
             }
             
-            printGameState($allPlayers,$allCards);
-            getWinner($allPlayers);
+            printGameState($allPlayers,$allCards, $allPoints);
+            getWinner($allPoints, $allPlayers);
         ?>
     </body>
 </html>
