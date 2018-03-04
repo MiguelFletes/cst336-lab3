@@ -110,6 +110,7 @@
                         array_push($index, $i);
                     }
                 }
+                $multiples = array();
                 $max = $possibleWinner[0];
                 $maxIndex = $index[0];
                 for($i = 1; $i < sizeof($possibleWinner); $i++)
@@ -118,15 +119,47 @@
                     {
                         $max = $possibleWinner[$i];
                         $maxIndex = $index[$i];
+                        $multiples = array();
+                    }
+                    else if($possibleWinner[$i] == $max)
+                    {
+                        array_push($multiples, $index[$i]);
                     }
                 }
+                if(!empty($possibleWinner))
+                {
+                    if(empty($multiples))
+                    {
+                        $winnerTotal = $winnerTotal - $max;
+                        //echo "<h1><br>Winner is</h1>";
+                        echo $allPlayers[$maxIndex]['name'];
+                        echo " wins ";
+                        echo $winnerTotal;
+                        echo " points!!";
+                    }
+                    else {
+                        echo "There's a tie...";
+                        echo "</br>";
+                        echo $allPlayers[$maxIndex]['name'];
+                        echo " has a total of ";
+                        echo $winnerTotal;
+                        echo " points!!";
+                        echo "</br>";
+                        for($i = 0; $i < sizeof($multiples); $i++)
+                        {
+                            echo $allPlayers[$multiples[$i]]['name'];
+                            echo " has a total of ";
+                            echo $winnerTotal;
+                            echo " points!!";
+                            echo "</br>";
+                        }
+                    }
+                    
+                }
+                else {
+                    echo "All players Lost. There is no winner...";
+                }
                 
-                $winnerTotal = $winnerTotal - $max;
-                //echo "<h1><br>Winner is</h1>";
-                echo $allPlayers[$maxIndex]['name'];
-                echo " wins ";
-                echo $winnerTotal;
-                echo " points!!";
                 
             }
             
