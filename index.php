@@ -2,9 +2,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+        <link href = "css/styles.css" rel = "stylesheet" type = "text/css" />
     </head>
     <body>
+        <header>
+            <h2>Silverjack</h2>
+        </header>
         <?php
             $player1 = array('name' => 'Chino', 'imgUrl' => './img/user_pics/chino.png', 'hand' => array(), 'points' => 0);
             $player2 = array('name' => 'Celina', 'imgUrl' => './img/user_pics/celina.jpg', 'hand' => array(), 'points' => 0);
@@ -34,26 +37,26 @@
                 
             function printGameState(&$allPlayers,&$allCards,&$allPoints){
                 foreach($allPlayers as $player) {
-                    echo "<img src='" . $player['imgUrl'] . "' width='100' height='150' />";
-                    echo $player['name'] . "<br/>";
-                    generateDeck($player,$allCards);
                     echo "<div id = gamePrint>";
+                    echo $player['name']. "                               ";
+                    echo "<img id = pic src='" . $player['imgUrl'] . "' width='100' height='125' />";
+                    generateDeck($player,$allCards);
                     displayhand($player);
-                    echo "</div>";
                     array_push($allPoints, $player['points']);
 
                 }   
-                
-
             }
             
             function displayHand(&$player){
                 
+                
                 for($i=0; $i<count($player['hand']); $i++){
                     echo "<img id='playerCards' src=" . $player['hand'][$i] . " />";
                 }
-        
+                echo "</div>";
+                echo "<div id = points>";
                 echo "\t\t" . $player['points'] . " points<br>";
+                echo "</div>";
             }
             
             function generateDeck(&$player,&$allCards)
@@ -164,7 +167,16 @@
             }
             
             printGameState($allPlayers,$allCards, $allPoints);
-            getWinner($allPoints, $allPlayers);
         ?>
+        <div id = "winner">
+            <br />
+            <?php
+                getWinner($allPoints, $allPlayers);
+            ?>
+            <br />
+            <form>
+                <input id = "button" type="submit" value ="Play Again"/>
+            </form>
+        </div>
     </body>
 </html>
