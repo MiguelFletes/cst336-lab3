@@ -120,10 +120,13 @@
                         $maxIndex = $index[$i];
                     }
                 }
-
-                echo "<h1><br>Winner is</h1>";
+                
+                $winnerTotal = $winnerTotal - $max;
+                //echo "<h1><br>Winner is</h1>";
                 echo $allPlayers[$maxIndex]['name'];
-                echo $max;
+                echo " wins ";
+                echo $winnerTotal;
+                echo " points!!";
                 
             }
             
