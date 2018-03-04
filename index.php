@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,6 +16,7 @@
             $diamondsUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
             $spadesUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
             
+            
             $allCards = array(
                 $heartsUsed,
                 $diamondsUsed,
@@ -29,36 +31,30 @@
                 $player4
                 );
                 
-            function printGameState($allPlayers,$allCards){
+            
+                
+            function printGameState(&$allPlayers,&$allCards){
                 foreach($allPlayers as $player) {
-                    echo "<img src='" . $player['imgUrl'] . "'/>";
+                    echo "<img src='" . $player['imgUrl'] . "' width='100' height='150' />";
                     echo $player['name'] . "<br/>";
                     generateDeck($player,$allCards);
+                    echo "<div id = gamePrint>";
                     displayhand($player);
+                    echo "</div>";
+
                 }
                 
             }
             
             function displayHand(&$player){
+                
                 for($i=0; $i<count($player['hand']); $i++){
                     echo "<img id='playerCards' src=" . $player['hand'][$i] . " />";
                 }
-                echo "<br>";
+        
+                echo "\t\t" . $player['points'] . " points<br>";
+
             }
-            
-            // function getImgURLForCardIndex($index)
-            // {
-            //     $suitIndex= floor($index/13);
-            //     switch ($suitIndex) {
-            //         case 0:
-            //             // code...
-            //             break;
-                    
-            //         default:
-            //             // code...
-            //             break;
-            //     }
-            // }
             
             function generateDeck(&$player,&$allCards)
             {
@@ -100,11 +96,29 @@
                 }
             }
             
-            function getHand()
-            {
-                
+            //Function to print out the winner and points won. This function is not finished.. 
+            function getWinner(&$allPlayers){
+                $winner = array();
+                $points = 0;
+                foreach ($allPlayers as $players) {
+                    $points += $players['points'];
+                    if(count($winner) ==0){
+                        array_push($winner, $players);
+                    }
+                    else if ($winner[0]['points']<$players['points']){
+                        unset($winner);
+                        $winner = array();
+                        array_push($winner, $players);
+                    }
+                    
+                }
+                echo "<h1><br>Winner is</h1>";
+                echo $winner[0]['name'];
+                echo $points;
             }
+            
             printGameState($allPlayers,$allCards);
+            getWinner($allPlayers);
         ?>
     </body>
 </html>
