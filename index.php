@@ -14,6 +14,13 @@
             $player3 = array('name' => 'Miguel', 'imgUrl' => './img/user_pics/miguel.jpg', 'hand' => array(), 'points' => 0);
             $player4 = array('name' => 'Oscar', 'imgUrl' => './img/user_pics/Oscar_Ramirez.jpg', 'hand' => array(), 'points' => 0);
             
+            $numPlayers = 4;
+            
+            $player1Displayed = false;
+            $player2Displayed = false;
+            $player3Displayed = false;
+            $player4Displayed = false;
+            
             $heartsUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
             $clubsUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
             $diamondsUsed = array(0,0,0,0,0,0,0,0,0,0,0,0,0);
@@ -33,26 +40,37 @@
                 $player4
                 );
                 
+            $playersDisplayed = array(
+                $player1Displayed,
+                $player2Displayed,
+                $player3Displayed,
+                $player4Displayed
+                );
+                
             $allPoints = array();
                 
-            function printGameState(&$allPlayers,&$allCards,&$allPoints){
-                foreach($allPlayers as $player) {
+            function printGameState(&$allPlayers,&$allCards,&$allPoints, &$playersDisplayed){
+                
+                global $numPlayers;
+                $numbers = range(0, 3);
+                shuffle($numbers);
+                
+                for($i=0;$i<$numPlayers;$i++){
+                    display($allPoints, $allPlayers[$numbers[$i]], $allCards);
+                } 
+            }
+            
+            function display($allPoints, $player, $allCards){
                     echo "<div id = gamePrint>";
                     echo $player['name']. "                               ";
                     echo "<img id = pic src='" . $player['imgUrl'] . "' width='100' height='125' />";
                     generateDeck($player,$allCards);
                     displayhand($player);
                     array_push($allPoints, $player['points']);
-                    echo "<br>";
-                    echo "<br>";
-                    echo "<br>";
-                    echo "<br>";
-
-                }   
+                    echo "<br><br><br><br>";
             }
             
             function displayHand(&$player){
-                
                 
                 for($i=0; $i<count($player['hand']); $i++){
                     echo "<img id='playerCards' src=" . $player['hand'][$i] . " />";
@@ -61,10 +79,7 @@
                 echo "<div id = points>";
                 echo "\t\t" . $player['points'] . " points<br>";
                 echo "</div>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
+                echo "<br><br><br><br>";
                 
             }
             
@@ -175,7 +190,7 @@
                 
             }
             
-            printGameState($allPlayers,$allCards, $allPoints);
+            printGameState($allPlayers,$allCards, $allPoints, $playersDisplayed);
         ?>
         <div id = "winner">
             <br />
