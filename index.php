@@ -43,6 +43,10 @@
                     generateDeck($player,$allCards);
                     displayhand($player);
                     array_push($allPoints, $player['points']);
+                    echo "<br>";
+                    echo "<br>";
+                    echo "<br>";
+                    echo "<br>";
 
                 }   
             }
@@ -57,6 +61,11 @@
                 echo "<div id = points>";
                 echo "\t\t" . $player['points'] . " points<br>";
                 echo "</div>";
+                echo "<br>";
+                echo "<br>";
+                echo "<br>";
+                echo "<br>";
+                
             }
             
             function generateDeck(&$player,&$allCards)
